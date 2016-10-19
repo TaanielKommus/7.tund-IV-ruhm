@@ -198,7 +198,7 @@
 		}
 		//kui ei olnud, j6uame siia
 		$stmt->close();
-		
+
 
 		$stmt = $mysqli->prepare("INSERT INTO user_interests (user_id, interest_id) VALUES (?, ?)");
 
@@ -253,7 +253,42 @@
 		return $result;
 	}
 
+	function getUserInterests() {
 
+		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+
+		$stmt = $mysqli->prepare("SELECT interest FROM interests JOIN user_interests ON interests.id=user_interests.interest_id
+			WHERE user_interests.user_id=?
+		");
+		//SESSION USER ID
+		echo $mysqli->error;
+
+		$stmt->bind_param("i", $_SESSION["userId"]);
+
+		$stmt->bind_result($interest);
+		$stmt->execute();
+
+
+		//tekitan massiivi
+		$result = array();
+
+		// tee seda seni, kuni on rida andmeid
+		// mis vastab select lausele
+		while ($stmt->fetch()) {
+
+			//tekitan objekti
+			$i = new StdClass();
+
+			$i->interest = $interest;
+
+			array_push($result, $i);
+		}
+
+		$stmt->close();
+		$mysqli->close();
+
+		return $result;
+	}
 
 
 

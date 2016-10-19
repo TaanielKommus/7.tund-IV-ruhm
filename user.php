@@ -48,6 +48,7 @@
 
     $interests = getAllInterests();
 
+ 		$userInterests = getUserInterests();
 ?>
 <h1><a href="data.php"> < tagasi</a> Kasutaja leht</h1>
 <?=$msg;?>
@@ -57,12 +58,12 @@
 </p>
 
 
-<h2>Salvesta hobi</h2>
+<h2>Kasutaja hobid</h2>
 <?php
 
     $listHtml = "<ul>";
 
-	foreach($interests as $i){
+	foreach($userInterests as $i){
 
 
 		$listHtml .= "<li>".$i->interest."</li>";
@@ -75,9 +76,10 @@
 	echo $listHtml;
 
 ?>
+
 <form method="POST">
 
-	<label>Hobi/huviala nimi</label><br>
+	<label>Salvesta uus hobi/huviala</label><br>
 	<input name="interest" type="text">
 
 	<input type="submit" value="Salvesta">
@@ -86,7 +88,7 @@
 
 
 
-<h2>Kasutaja hobid</h2>
+<h2>Nimekiri hobidest</h2>
 <form method="POST">
 
 	<label>Hobi/huviala nimi</label><br>
