@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	require("functions.php");
 
@@ -33,6 +33,16 @@
 	  ) {
 
 		saveInterest(cleanInput($_POST["interest"]));
+
+	}
+
+	if ( isset($_POST["userInterest"]) &&
+		!empty($_POST["userInterest"])
+	  ) {
+
+		echo $_POST["userInterest"];
+
+		saveUserInterest(cleanInput($_POST["userInterest"]));
 
 	}
 
